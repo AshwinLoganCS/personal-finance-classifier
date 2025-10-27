@@ -45,7 +45,6 @@ Perfect for anyone looking to gain control over their personal finances with dat
 - **Pie Chart**: Percentage breakdown of spending by category
 - **Bar Chart**: Total spending comparison across categories
 - **Cumulative Line Chart**: Track your total spending growth over time
-- **Stacked Area Chart**: Category spending evolution with smart weekly/monthly grouping
 - **Heatmap**: Discover spending patterns by day of week and category (e.g., "I always eat out on Fridays")
 
 ### 💡 Financial Insights

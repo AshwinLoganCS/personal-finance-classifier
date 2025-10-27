@@ -400,60 +400,6 @@ def display_visualizations(df):
     
     st.info("💡 **How to read this chart:** The line shows your total spending accumulating over time. Steep sections = heavy spending periods. Flat sections = no/minimal spending.")
     
-    # Category breakdown over time
-    st.markdown("#### 📊 Category Spending Trends")
-    
-    # Determine date range to choose appropriate grouping
-    date_range_days = (df_expenses['date'].max() - df_expenses['date'].min()).days
-    
-    if date_range_days < 60:  # Less than 2 months - use weekly grouping
-        df_expenses['time_period'] = df_expenses['date'].dt.to_period('W').apply(lambda r: r.start_time.strftime('%b %d'))
-        time_label = 'Week Starting'
-        st.info("📅 **Grouping by week** - Upload 2+ months of data to see monthly trends")
-    else:  # 2+ months - use monthly grouping
-        df_expenses['time_period'] = df_expenses['date'].dt.strftime('%b %Y')
-        time_label = 'Month'
-        st.info("📅 **Grouping by month** - Showing category spending trends over time")
-    
-    category_time = df_expenses.groupby(['time_period', 'category'])['abs_amount'].sum().reset_index()
-    
-    fig_area = px.area(
-        category_time,
-        x='time_period',
-        y='abs_amount',
-        color='category',
-        title="",
-        labels={'time_period': time_label, 'abs_amount': 'Amount ($)', 'category': 'Category'},
-        color_discrete_sequence=px.colors.qualitative.Set3
-    )
-    fig_area.update_layout(
-        xaxis_title=time_label,
-        yaxis_title="Spending ($)",
-        yaxis=dict(tickprefix="$"),
-        legend=dict(
-            orientation="v",
-            yanchor="top",
-            y=1,
-            xanchor="right",
-            x=1.15
-        )
-    )
-    st.plotly_chart(fig_area, use_container_width=True)
-    
-    with st.expander("💡 How to read this chart"):
-        st.markdown("""
-        - **Each colored layer** represents a spending category
-        - **Height of layer** = amount spent in that category
-        - **Total height** = total spending for that time period
-        - **Growing layers** = increasing spending in that category
-        - **Shrinking layers** = decreasing spending
-        
-        **Tip:** With more months of data, you can spot trends like:
-        - Seasonal patterns (holidays, back-to-school)
-        - Growing subscription costs
-        - Changes in lifestyle spending
-        """)
-    
     # Heatmap: Spending patterns by day of week and category
     st.markdown("#### 🔥 Spending Heatmap: Day of Week vs Category")
     
