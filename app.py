@@ -75,20 +75,6 @@ def main():
         
         st.markdown("---")
         
-        # Classifier selection
-        classifier_type = st.radio(
-            "Classifier Type",
-            options=['rule-based', 'ml'],
-            index=0,
-            help="Rule-based uses keyword matching. ML is for future implementation."
-        )
-        
-        if classifier_type == 'ml':
-            st.warning("⚠️ ML classifier is not yet trained. Using rule-based classifier.")
-            classifier_type = 'rule-based'
-        
-        st.markdown("---")
-        
         # Instructions
         st.subheader("📋 Instructions")
         st.markdown("""
@@ -112,7 +98,7 @@ def main():
         # Get skip_rows and auto_detect from session state or defaults
         skip_rows_value = st.session_state.get('skip_rows', 0)
         auto_detect_value = st.session_state.get('auto_detect', True)
-        process_uploaded_file(uploaded_file, classifier_type, skip_rows_value, auto_detect_value)
+        process_uploaded_file(uploaded_file, skip_rows_value, auto_detect_value)
 
 
 def show_landing_page():
@@ -149,7 +135,7 @@ def show_landing_page():
         st.write("Key metrics including total spending, income, and top merchants")
 
 
-def process_uploaded_file(uploaded_file, classifier_type, skip_rows=0, auto_detect=True):
+def process_uploaded_file(uploaded_file, skip_rows=0, auto_detect=True):
     """Process the uploaded CSV file and display results."""
     
     try:
@@ -209,7 +195,7 @@ def process_uploaded_file(uploaded_file, classifier_type, skip_rows=0, auto_dete
         
         # Classify transactions
         with st.spinner("Classifying transactions..."):
-            classifier = get_classifier(classifier_type)
+            classifier = get_classifier()
             categories = classifier.classify_batch(
                 df_enhanced['description'].tolist(),
                 df_enhanced['amount'].tolist()

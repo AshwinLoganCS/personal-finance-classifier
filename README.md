@@ -39,7 +39,7 @@ Perfect for anyone looking to gain control over their personal finances with dat
 - **Rule-Based Classifier**: Uses keyword matching to categorize transactions
 - **12 Categories**: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, Gambling/Sports Betting, Subscriptions, Transfers, and Other
 - **Smart Classification**: Recognizes hundreds of merchants and keywords for accurate categorization
-- **Extensible Design**: Framework ready for ML-based classification
+- **Continuously Improved**: Easy to add new keywords and categories as needed
 
 ### 📈 Interactive Visualizations
 - **Pie Chart**: Percentage breakdown of spending by category
@@ -65,7 +65,6 @@ Perfect for anyone looking to gain control over their personal finances with dat
 - **Frontend Framework**: Streamlit 1.31.0
 - **Data Processing**: Pandas 2.2.0, NumPy 1.26.3
 - **Interactive Visualizations**: Plotly 5.18.0 (all charts are interactive with hover, zoom, and pan)
-- **Machine Learning**: Scikit-learn 1.4.0 (for future enhancements)
 - **Language**: Python 3.8+
 
 ---
@@ -162,9 +161,8 @@ Personal Finance Expense Classifier/
 
 #### `classifier.py`
 - `RuleBasedClassifier`: Keyword-based categorization engine
-- `MLClassifier`: Placeholder for machine learning implementation
-- Category definitions and keyword mappings
-- Batch processing capabilities
+- Category definitions and keyword mappings (12 categories, hundreds of keywords)
+- Batch processing capabilities for efficient classification
 
 #### `utils.py`
 - CSV validation and cleaning functions
@@ -204,16 +202,16 @@ The rule-based classifier uses an extensive keyword dictionary to match transact
 
 ## 🔮 Future Enhancements
 
-- [ ] Machine Learning classifier with training interface
 - [ ] Budget tracking and alerts
 - [ ] Multi-currency support
 - [ ] Recurring transaction detection
 - [ ] Anomaly detection for unusual spending
 - [ ] Historical comparison (month-over-month, year-over-year)
-- [ ] Custom category creation
+- [ ] Custom category creation by users
 - [ ] Mobile-responsive design improvements
 - [ ] Database integration for long-term storage
 - [ ] User authentication and profiles
+- [ ] Export to PDF reports
 
 ---
 
@@ -242,7 +240,7 @@ This project demonstrates proficiency in:
 - Web application development with Streamlit
 - Data visualization and analytics
 - Clean code architecture and modular design
-- Machine learning frameworks and algorithms
+- Rule-based systems and keyword matching algorithms
 
 ---
 

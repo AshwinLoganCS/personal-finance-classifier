@@ -1,5 +1,5 @@
 """
-Transaction categorization module with rule-based and ML classifiers.
+Transaction categorization module with rule-based keyword matching classifier.
 """
 
 import re
@@ -154,78 +154,14 @@ class RuleBasedClassifier:
         return [self.classify(desc, amt) for desc, amt in zip(descriptions, amounts)]
 
 
-class MLClassifier:
+def get_classifier():
     """
-    Machine Learning classifier for transactions (placeholder for future implementation).
-    Can be extended with scikit-learn's TfidfVectorizer + LogisticRegression or RandomForest.
-    """
+    Get the rule-based transaction classifier.
     
-    def __init__(self):
-        self.model = None
-        self.vectorizer = None
-        self.is_trained = False
-    
-    def train(self, descriptions: List[str], amounts: List[float], labels: List[str]):
-        """
-        Train the ML model on labeled data.
-        
-        Args:
-            descriptions (List[str]): Transaction descriptions
-            amounts (List[float]): Transaction amounts
-            labels (List[str]): Category labels
-        """
-        # Placeholder for ML training implementation
-        # Can use sklearn.feature_extraction.text.TfidfVectorizer
-        # and sklearn.ensemble.RandomForestClassifier
-        pass
-    
-    def classify(self, description: str, amount: float) -> str:
-        """
-        Classify a transaction using the trained ML model.
-        
-        Args:
-            description (str): Transaction description
-            amount (float): Transaction amount
-            
-        Returns:
-            str: Category name
-        """
-        if not self.is_trained:
-            raise ValueError("Model must be trained before classification")
-        
-        # Placeholder for ML prediction
-        return 'Other'
-    
-    def classify_batch(self, descriptions: List[str], amounts: List[float]) -> List[str]:
-        """
-        Classify multiple transactions using the trained ML model.
-        
-        Args:
-            descriptions (List[str]): List of transaction descriptions
-            amounts (List[float]): List of transaction amounts
-            
-        Returns:
-            List[str]: List of category names
-        """
-        return [self.classify(desc, amt) for desc, amt in zip(descriptions, amounts)]
-
-
-def get_classifier(classifier_type: str = 'rule-based'):
-    """
-    Factory function to get the appropriate classifier.
-    
-    Args:
-        classifier_type (str): Type of classifier ('rule-based' or 'ml')
-        
     Returns:
-        Classifier instance
+        RuleBasedClassifier: Instance of the rule-based classifier
     """
-    if classifier_type == 'rule-based':
-        return RuleBasedClassifier()
-    elif classifier_type == 'ml':
-        return MLClassifier()
-    else:
-        raise ValueError(f"Unknown classifier type: {classifier_type}")
+    return RuleBasedClassifier()
 
 
 def get_all_categories() -> List[str]:
