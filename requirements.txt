@@ -1,0 +1,19 @@
+# Personal Finance Expense Classifier - Dependencies
+
+# Core framework
+streamlit==1.31.0
+
+# Data processing
+pandas==2.2.0
+numpy==1.26.3
+
+# Machine learning (for future ML classifier)
+scikit-learn==1.4.0
+
+# Visualizations
+matplotlib==3.8.2
+plotly==5.18.0
+
+# Additional utilities
+python-dateutil==2.8.2
+
