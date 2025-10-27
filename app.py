@@ -4,8 +4,6 @@ Personal Finance Expense Classifier - Streamlit Application
 
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from io import BytesIO
@@ -443,41 +441,6 @@ def display_visualizations(df):
     st.plotly_chart(fig_heatmap, use_container_width=True)
     
     st.info("💡 **How to read this:** Darker red = more spending on that day for that category. Find your spending patterns like 'I always eat out on Fridays' or 'Grocery shopping on Sundays.'")
-    
-    # Matplotlib/Seaborn version for comparison
-    st.markdown("---")
-    st.markdown("#### 🔥 Spending Heatmap (Matplotlib Version)")
-    st.caption("Static version with values displayed in cells - compare with the interactive version above")
-    
-    # Create matplotlib figure
-    fig_mpl, ax = plt.subplots(figsize=(12, max(6, len(heatmap_pivot) * 0.5)))
-    
-    # Create seaborn heatmap
-    sns.heatmap(
-        heatmap_pivot,
-        annot=True,                    # Show dollar amounts in cells
-        fmt='.0f',                     # No decimal places
-        cmap='RdYlGn_r',               # Same color scheme as Plotly
-        cbar_kws={'label': 'Amount ($)'},
-        linewidths=0.5,                # Cell borders
-        linecolor='gray',
-        ax=ax,
-        vmin=0                         # Start color scale at 0
-    )
-    
-    # Customize appearance
-    ax.set_title('Spending by Day of Week and Category', fontsize=14, pad=20)
-    ax.set_xlabel('Day of Week', fontsize=12)
-    ax.set_ylabel('Category', fontsize=12)
-    plt.xticks(rotation=45, ha='right')
-    plt.yticks(rotation=0)
-    plt.tight_layout()
-    
-    # Display in Streamlit
-    st.pyplot(fig_mpl)
-    plt.close(fig_mpl)  # Free up memory
-    
-    st.info("💡 **Matplotlib version:** All values shown directly in cells. No hover needed, but not interactive.")
 
 
 def display_insights(df):
