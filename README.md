@@ -37,14 +37,16 @@ Perfect for anyone looking to gain control over their personal finances with dat
 
 ### 🤖 Intelligent Categorization
 - **Rule-Based Classifier**: Uses keyword matching to categorize transactions
-- **9 Categories**: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, and Other
+- **12 Categories**: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, Gambling/Sports Betting, Subscriptions, Transfers, and Other
+- **Smart Classification**: Recognizes hundreds of merchants and keywords for accurate categorization
 - **Extensible Design**: Framework ready for ML-based classification
 
 ### 📈 Interactive Visualizations
 - **Pie Chart**: Percentage breakdown of spending by category
 - **Bar Chart**: Total spending comparison across categories
-- **Time Series**: Monthly spending trends over time
-- **Area Chart**: Category spending evolution over time
+- **Cumulative Line Chart**: Track your total spending growth over time
+- **Stacked Area Chart**: Category spending evolution with smart weekly/monthly grouping
+- **Heatmap**: Discover spending patterns by day of week and category (e.g., "I always eat out on Fridays")
 
 ### 💡 Financial Insights
 - **Key Metrics**: Total spending, income, and net cash flow
@@ -63,7 +65,7 @@ Perfect for anyone looking to gain control over their personal finances with dat
 
 - **Frontend Framework**: Streamlit 1.31.0
 - **Data Processing**: Pandas 2.2.0, NumPy 1.26.3
-- **Visualizations**: Plotly 5.18.0, Matplotlib 3.8.2
+- **Interactive Visualizations**: Plotly 5.18.0 (all charts are interactive with hover, zoom, and pan)
 - **Machine Learning**: Scikit-learn 1.4.0 (for future enhancements)
 - **Language**: Python 3.8+
 

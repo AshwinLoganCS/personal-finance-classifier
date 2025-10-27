@@ -453,6 +453,49 @@ def display_visualizations(df):
         - Growing subscription costs
         - Changes in lifestyle spending
         """)
+    
+    # Heatmap: Spending patterns by day of week and category
+    st.markdown("#### 🔥 Spending Heatmap: Day of Week vs Category")
+    
+    # Add day of week to expenses
+    df_expenses['day_of_week'] = df_expenses['date'].dt.day_name()
+    
+    # Define day order for proper sorting
+    day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    
+    # Group by day of week and category
+    heatmap_data = df_expenses.groupby(['day_of_week', 'category'])['abs_amount'].sum().reset_index()
+    
+    # Pivot for heatmap format
+    heatmap_pivot = heatmap_data.pivot(index='category', columns='day_of_week', values='abs_amount').fillna(0)
+    
+    # Reorder columns to start with Monday
+    heatmap_pivot = heatmap_pivot.reindex(columns=day_order, fill_value=0)
+    
+    # Sort categories by total spending (most to least)
+    category_totals = heatmap_pivot.sum(axis=1).sort_values(ascending=True)
+    heatmap_pivot = heatmap_pivot.loc[category_totals.index]
+    
+    # Create heatmap
+    fig_heatmap = go.Figure(data=go.Heatmap(
+        z=heatmap_pivot.values,
+        x=heatmap_pivot.columns,
+        y=heatmap_pivot.index,
+        colorscale='RdYlGn_r',  # Red (high) to Green (low) - reversed
+        hovertemplate='<b>%{y}</b><br>%{x}<br>$%{z:.2f}<extra></extra>',
+        colorbar=dict(title="Amount ($)", tickprefix="$")
+    ))
+    
+    fig_heatmap.update_layout(
+        xaxis_title="Day of Week",
+        yaxis_title="Category",
+        height=max(400, len(heatmap_pivot) * 40),  # Dynamic height based on categories
+        xaxis=dict(side='top')  # Days at the top like a calendar
+    )
+    
+    st.plotly_chart(fig_heatmap, use_container_width=True)
+    
+    st.info("💡 **How to read this:** Darker red = more spending on that day for that category. Find your spending patterns like 'I always eat out on Fridays' or 'Grocery shopping on Sundays.'")
 
 
 def display_insights(df):
