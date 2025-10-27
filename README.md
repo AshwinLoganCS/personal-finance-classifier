@@ -6,6 +6,16 @@ An intelligent web application built with Python and Streamlit that automaticall
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+## 🌐 Live Demo
+
+**Try it now! No installation required:**
+
+👉 **[Launch App](https://personal-finance-classifier-vnjiqyfkvqxafaerpdfkgj.streamlit.app/)**
+
+Simply upload your bank CSV and get instant financial insights!
+
+---
+
 ## 🎯 Project Overview
 
 This application helps users understand their spending habits by:
@@ -59,7 +69,9 @@ Perfect for anyone looking to gain control over their personal finances with dat
 
 ---
 
-## 📦 Installation
+## 💻 For Developers - Local Installation
+
+Want to run the app locally, contribute code, or customize it? Follow these instructions:
 
 ### Prerequisites
 - Python 3.8 or higher
