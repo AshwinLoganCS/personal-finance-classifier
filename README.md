@@ -1,278 +1,84 @@
-# 💰 Personal Finance Expense Classifier
+# Personal Finance Expense Classifier
 
-An intelligent web application built with Python and Streamlit that automatically categorizes financial transactions, visualizes spending patterns, and provides actionable insights into your personal finances.
+A simple web app that categorizes your bank transactions and shows you where your money is going. Built with Python and Streamlit.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-red.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+Live demo: https://personal-finance-classifier-vnjiqyfkvqxafaerpdfkgj.streamlit.app/
 
-## 🌐 Live Demo
+## What it does
 
-**Try it now! No installation required:**
+Upload a CSV of your bank transactions and the app will:
+- Automatically categorize each transaction (food, groceries, entertainment, etc.)
+- Show you charts of your spending patterns
+- Calculate total spending, income, and net cashflow
+- Let you download the categorized data
 
-👉 **[Launch App](https://personal-finance-classifier-vnjiqyfkvqxafaerpdfkgj.streamlit.app/)**
+I made this because I wanted an easy way to see where I was spending money without manually going through hundreds of transactions or paying for budgeting software.
 
-Simply upload your bank CSV and get instant financial insights!
+## Features
 
----
+- Supports 12 categories: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, Gambling/Sports Betting, Subscriptions, Transfers, and Other
+- Works with most bank statement formats (as long as you have date, description, and amount columns)
+- Interactive charts - pie chart, bar chart, spending over time, and a heatmap showing spending by day of week
+- Shows top merchants and spending averages
+- Export your categorized data as CSV
 
-## 🎯 Project Overview
+## Running locally
 
-This application helps users understand their spending habits by:
-- Automatically categorizing transactions from bank statements, credit cards, or digital wallets (Venmo, Apple Card, etc.)
-- Generating interactive visualizations to identify spending patterns
-- Providing key financial metrics and insights
-- Exporting cleaned and classified data for further analysis
-
-Perfect for anyone looking to gain control over their personal finances with data-driven insights.
-
----
-
-## ✨ Features
-
-### 📊 Data Processing
-- **CSV Upload**: Support for standard financial transaction formats
-- **Data Cleaning**: Automatic normalization and validation of uploaded data
-- **Smart Parsing**: Handles various date formats and transaction descriptions
-
-### 🤖 Intelligent Categorization
-- **Rule-Based Classifier**: Uses keyword matching to categorize transactions
-- **12 Categories**: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, Gambling/Sports Betting, Subscriptions, Transfers, and Other
-- **Smart Classification**: Recognizes hundreds of merchants and keywords for accurate categorization
-- **Continuously Improved**: Easy to add new keywords and categories as needed
-
-### 📈 Interactive Visualizations
-- **Pie Chart**: Percentage breakdown of spending by category
-- **Bar Chart**: Total spending comparison across categories
-- **Cumulative Line Chart**: Track your total spending growth over time
-- **Heatmap**: Discover spending patterns by day of week and category (e.g., "I always eat out on Fridays")
-
-### 💡 Financial Insights
-- **Key Metrics**: Total spending, income, and net cash flow
-- **Top Merchants**: Identify where you spend the most
-- **Category Analysis**: Detailed breakdown with transaction counts and averages
-- **Period Summary**: Analysis date range and duration
-
-### 📥 Export Functionality
-- **Customizable Downloads**: Select specific columns to include
-- **CSV Format**: Compatible with Excel, Google Sheets, and other tools
-- **Preview Before Download**: Verify data before exporting
-
----
-
-## 🛠️ Technology Stack
-
-- **Frontend Framework**: Streamlit 1.31.0
-- **Data Processing**: Pandas 2.2.0, NumPy 1.26.3
-- **Interactive Visualizations**: Plotly 5.18.0 (all charts are interactive with hover, zoom, and pan)
-- **Language**: Python 3.8+
-
----
-
-## 💻 For Developers - Local Installation
-
-Want to run the app locally, contribute code, or customize it? Follow these instructions:
-
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
-
-### Setup Instructions
-
-1. **Clone the repository** (or download the project files)
-```bash
-cd "Personal Finance Expense Classifier"
-```
-
-2. **Create a virtual environment** (recommended)
-```bash
-python -m venv venv
-
-# On macOS/Linux:
-source venv/bin/activate
-
-# On Windows:
-venv\Scripts\activate
-```
-
-3. **Install dependencies**
+1. Clone this repo
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## 🚀 Usage
-
-### Running the Application
-
-Start the Streamlit server:
+3. Run the app:
 ```bash
 streamlit run app.py
 ```
 
-The application will open in your default web browser at `http://localhost:8501`
+## CSV format
 
-### Preparing Your Data
+Your file needs three columns:
+- `date` - transaction date
+- `description` - what the transaction was
+- `amount` - negative for expenses, positive for income
 
-Your CSV file should contain these three columns:
-- `date`: Transaction date (various formats supported)
-- `description`: Transaction description or merchant name
-- `amount`: Transaction amount (negative for expenses, positive for income)
-
-**Example CSV format:**
+Example:
 ```csv
 date,description,amount
 2024-01-15,Starbucks Coffee,-5.75
 2024-01-16,Whole Foods Market,-87.32
-2024-01-17,Shell Gas Station,-45.00
 2024-01-18,Salary Deposit,3000.00
 ```
 
-### Step-by-Step Guide
+## How it works
 
-1. **Upload CSV**: Use the sidebar to upload your transaction CSV file
-2. **Review Data**: Check the automatically categorized transactions in the Overview tab
-3. **Explore Visualizations**: View spending patterns through interactive charts
-4. **Analyze Insights**: Review key metrics and top spending categories
-5. **Download Results**: Export the classified data with custom column selection
+The categorization uses keyword matching. I've built up a dictionary of keywords for each category - like "starbucks", "chipotle", "ubereats" for Food & Dining, or "shell", "chevron", "uber" for Transportation. When processing transactions, it looks for these keywords in the description.
 
----
+It's not perfect but works pretty well for my needs. You can easily add more keywords in `classifier.py` if needed.
 
-## 📁 Project Structure
+## Project structure
 
-```
-Personal Finance Expense Classifier/
-│
-├── app.py                  # Main Streamlit application
-├── classifier.py           # Transaction categorization logic
-├── utils.py               # Data cleaning and helper functions
-├── requirements.txt       # Project dependencies
-└── README.md             # Project documentation
-```
+- `app.py` - main Streamlit app with all the UI and charts
+- `classifier.py` - categorization logic
+- `utils.py` - data cleaning functions
+- `requirements.txt` - dependencies
 
-### Module Descriptions
+## Tech stack
 
-#### `app.py`
-- Main Streamlit interface and UI components
-- Chart rendering and visualization logic
-- User interaction handling
-- Download functionality
+- Streamlit for the web interface
+- Pandas for data processing
+- Plotly for interactive charts
+- Python 3.8+
 
-#### `classifier.py`
-- `RuleBasedClassifier`: Keyword-based categorization engine
-- Category definitions and keyword mappings (12 categories, hundreds of keywords)
-- Batch processing capabilities for efficient classification
+## Future improvements
 
-#### `utils.py`
-- CSV validation and cleaning functions
-- Data normalization and type conversion
-- Date parsing and formatting
-- Merchant name extraction
+Some things I might add later:
+- Budget tracking
+- Month over month comparisons
+- Better handling of recurring transactions
+- Custom categories
+- Multi-currency support
 
----
+## License
 
-## 🎨 Features Breakdown
-
-### Categorization Logic
-
-The rule-based classifier uses an extensive keyword dictionary to match transaction descriptions with categories:
-
-- **Food & Dining**: Restaurants, cafes, delivery services (50+ keywords)
-- **Groceries**: Supermarkets, farmers markets (20+ keywords)
-- **Transportation**: Gas stations, rideshares, parking (25+ keywords)
-- **Entertainment**: Streaming services, gaming, events (30+ keywords)
-- **Shopping**: Retail stores, online marketplaces (40+ keywords)
-- **Bills & Utilities**: Internet, phone, electricity, insurance (25+ keywords)
-- **Health**: Pharmacies, medical services (20+ keywords)
-- **Income**: Salary, deposits, refunds
-- **Other**: Uncategorized transactions
-
-### Data Processing Pipeline
-
-1. **Upload** → CSV file validation
-2. **Clean** → Normalize columns, handle missing data
-3. **Enhance** → Add derived columns (transaction type, merchant, month)
-4. **Classify** → Apply categorization algorithm
-5. **Visualize** → Generate interactive charts
-6. **Analyze** → Calculate insights and metrics
-7. **Export** → Download processed data
-
----
-
-## 🔮 Future Enhancements
-
-- [ ] Budget tracking and alerts
-- [ ] Multi-currency support
-- [ ] Recurring transaction detection
-- [ ] Anomaly detection for unusual spending
-- [ ] Historical comparison (month-over-month, year-over-year)
-- [ ] Custom category creation by users
-- [ ] Mobile-responsive design improvements
-- [ ] Database integration for long-term storage
-- [ ] User authentication and profiles
-- [ ] Export to PDF reports
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here are some ways you can contribute:
-- Report bugs and issues
-- Suggest new features or improvements
-- Improve documentation
-- Submit pull requests
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - feel free to use it for personal or commercial projects.
-
----
-
-## 👤 Author
-
-**Ashwin Loganathan**
-
-This project demonstrates proficiency in:
-- Python development and data processing
-- Web application development with Streamlit
-- Data visualization and analytics
-- Clean code architecture and modular design
-- Rule-based systems and keyword matching algorithms
-
----
-
-## 📧 Contact & Feedback
-
-For questions, suggestions, or feedback, please open an issue or reach out directly.
-
----
-
-## 🙏 Acknowledgments
-
-- Built with [Streamlit](https://streamlit.io/) - an amazing framework for data apps
-- Visualizations powered by [Plotly](https://plotly.com/)
-- Data processing with [Pandas](https://pandas.pydata.org/)
-
----
-
-## 📸 Screenshots
-
-### Dashboard Overview
-The main dashboard provides an intuitive interface for uploading and analyzing transactions.
-
-### Spending Visualizations
-Interactive charts help identify spending patterns and trends over time.
-
-### Financial Insights
-Key metrics and top merchant analysis provide actionable insights.
-
-### Download Options
-Customizable export options for further analysis in Excel or other tools.
-
----
-
-**Made with ❤️ and Python**
-
+MIT License - use it however you want
