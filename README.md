@@ -1,26 +1,20 @@
 # Personal Finance Expense Classifier
 
-A simple web app that categorizes your bank transactions and shows you where your money is going. Built with Python and Streamlit.
+A web application that automatically categorizes bank transactions and visualizes spending patterns. Built with Python and Streamlit.
 
 Live demo: https://personal-finance-classifier-vnjiqyfkvqxafaerpdfkgj.streamlit.app/
 
-## What it does
+## Overview
 
-Upload a CSV of your bank transactions and the app will:
-- Automatically categorize each transaction (food, groceries, entertainment, etc.)
-- Show you charts of your spending patterns
-- Calculate total spending, income, and net cashflow
-- Let you download the categorized data
-
-I made this because I wanted an easy way to see where I was spending money without manually going through hundreds of transactions or paying for budgeting software.
+This tool processes CSV exports from bank statements and credit cards, automatically categorizing transactions and generating insights about spending behavior. It's designed to give you a clear picture of where your money goes without manual data entry or subscription fees.
 
 ## Features
 
-- Supports 12 categories: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, Gambling/Sports Betting, Subscriptions, Transfers, and Other
-- Works with most bank statement formats (as long as you have date, description, and amount columns)
-- Interactive charts - pie chart, bar chart, spending over time, and a heatmap showing spending by day of week
-- Shows top merchants and spending averages
-- Export your categorized data as CSV
+- Automatic categorization across 12 categories: Food & Dining, Groceries, Transportation, Entertainment, Shopping, Bills & Utilities, Health, Income, Gambling/Sports Betting, Subscriptions, Transfers, and Other
+- Support for standard bank statement CSV formats (requires date, description, and amount columns)
+- Interactive visualizations: pie charts, bar charts, spending timelines, and day-of-week heatmaps
+- Financial metrics including total spending, income, net cashflow, and top merchants
+- CSV export of categorized data for further analysis
 
 ## Running locally
 
@@ -52,16 +46,16 @@ date,description,amount
 
 ## How it works
 
-The categorization uses keyword matching. I've built up a dictionary of keywords for each category - like "starbucks", "chipotle", "ubereats" for Food & Dining, or "shell", "chevron", "uber" for Transportation. When processing transactions, it looks for these keywords in the description.
+The categorization engine uses keyword matching against a curated dictionary of merchant names and transaction descriptors. Each category contains dozens of keywords that are matched against transaction descriptions. For example, Food & Dining includes keywords like "starbucks", "chipotle", and "ubereats", while Transportation covers "shell", "chevron", and ride-sharing services.
 
-It's not perfect but works pretty well for my needs. You can easily add more keywords in `classifier.py` if needed.
+The keyword dictionary can be extended in `classifier.py` to improve accuracy for specific use cases.
 
 ## Project structure
 
-- `app.py` - main Streamlit app with all the UI and charts
-- `classifier.py` - categorization logic
-- `utils.py` - data cleaning functions
-- `requirements.txt` - dependencies
+- `app.py` - main Streamlit app with UI and visualization logic
+- `classifier.py` - transaction categorization engine
+- `utils.py` - data cleaning and processing utilities
+- `requirements.txt` - project dependencies
 
 ## Tech stack
 
@@ -72,11 +66,11 @@ It's not perfect but works pretty well for my needs. You can easily add more key
 
 ## Future improvements
 
-Some things I might add later:
-- Budget tracking
-- Month over month comparisons
-- Better handling of recurring transactions
-- Custom categories
+Potential enhancements:
+- Budget tracking and threshold alerts
+- Month-over-month comparison analysis
+- Recurring transaction detection
+- User-defined custom categories
 - Multi-currency support
 
 ## License
